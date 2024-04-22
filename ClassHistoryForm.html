@@ -2,6 +2,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en">
 <link href="stylesheet.css" rel="stylesheet">
+
 <head>
 	<meta charset="utf-8">
   	<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -20,11 +21,10 @@
 	
 	<form action="ClassHistoryForm_submit" method="post" enctype="multipart/form-data" accept-charset="utf-8">
 		<!--No max file size-->
-		<p>
-			Class history: <input type="file" name="ClassHistory" id="ClassHistory">
-		</p>
+		<label for="class_history">Class history: </label>
+		<input type="file" name="class_history" id="class_history">
 	
-		<p><input type="submit" name="upload" value="Upload files"></p>
+		<p class="center"><input type="submit" name="upload" value="Upload files"></p>
 	</form>
 	
 	<!--FIXME: footer-->
