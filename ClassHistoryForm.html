@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en">
+<link href="stylesheet.css" rel="stylesheet">
 <head>
 	<meta charset="utf-8">
   	<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -9,6 +10,7 @@
 	<!-- To upload class history file from Ellucian degree management software -->
   	<title>Upload Class History</title>
 
+	<!-- FIXME: Include upload for both class history and dynamic schedule at same time -->
   
 </head>
 <body>
@@ -16,10 +18,13 @@
 	
 	<h1 id="upload_my_class_history">Upload My Class History</h1> <!--FIXME: center header?-->
 	
-	<form action="ClassHistoryForm_submit" method="post" accept-charset="utf-8">
-		
+	<form action="ClassHistoryForm_submit" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+		<!--No max file size-->
+		<p>
+			Class history: <input type="file" name="ClassHistory" id="ClassHistory">
+		</p>
 	
-		<p><input type="submit" value="Continue &rarr;"></p>
+		<p><input type="submit" name="upload" value="Upload files"></p>
 	</form>
 	
 	<!--FIXME: footer-->
