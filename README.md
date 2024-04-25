@@ -7,6 +7,8 @@ All project files are treated as if stored in a single folder except for SQL fil
 
 ## Features
 - Self-contained sign up and login system
+  - Log in with student ID & PIN
+  - Provide email at sign-up for forgot password functionality
 - Accept upload of
   - student "class history" (from Ellucian degree management software) as PDF
   - semester class offerings from dynamic schedule (.xls)
