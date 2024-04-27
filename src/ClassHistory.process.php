@@ -35,10 +35,12 @@ foreach ($pdf->getPages() as $page) {
 	$text = array_merge($text, $page->getTextArray());
 }
 
-// notify user if document does not contain "Class History"
-if (!in_array("Class History", $text)) {
-	missingData('PDF uploaded as class history is missing "Class History" header', "%s. This document is not a class history document.");
+// notify user if document does not contain "Class History" and assign index if so
+$start_index = array_search("Class History", $text);
+if ($start_index === false) {
+	missingData('PDF uploaded as class history is missing "Class History" header', '%s. This document is not a class history document.');
 }
+$text = array_slice($text, $start_index);
 
 
 /**
