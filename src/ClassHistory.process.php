@@ -9,14 +9,15 @@
  * @see ClassHistoryForm.hmtl
  *
  * @param	String	$missing_data	specifies the field name for missing data
- * @return void
+ * @return	void
  */
-function missingData(string $missing_data, string $error_text = "%s information cannot be found within the class history document.") {
-	echo "<p>"; // FIXME: style tags to center text block in middle of screen
-	echo sprintf($error_text, $missing_data) . " Please re-upload valid class history document.";
-	echo "</p>"; // FIXME: button leading to ClassHistoryForm.html
+function missingData(string $missing_data, string $error_text = '%s information cannot be found within the class history document.') {
+	echo '<p>'; // FIXME: style tags to center text block in middle of screen
+	echo sprintf($error_text, $missing_data) . ' Please re-upload valid class history document.';
+	echo '</p>'; // FIXME: button leading to ClassHistoryForm.html
 	die();
 }
+
 
 /** 
  * I: Parses PDF file and return content as String array
