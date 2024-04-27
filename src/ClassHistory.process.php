@@ -82,7 +82,29 @@ foreach ($UD_fields as $field => $regex) {
 }
 
 
+/**
+ * III: Assigns class data (CD) for database allocation
+ *
+ * To reduce complexity searching over large arrays, parsed data is shifted off array after use
+ */
+$subjects = '/^(ACCT|AENT|AGEC|ANSC|ARTH|BHSC|BIOL|BIOT|BLOG|BOTN|BUSA|CHEM|COMM|COUN|CRJU|CSCI|CSIS|DATA|ECON|ECSP|EDMG|EDSC|EDUC|EEGG|ELET|ENGG|ENGL|EPSY|FCSC|FDNU|FREN|FVSU|GEOG|GEOL|GERO|HIST|HLTH|HORT|HPER|ICDV|ITEC|MAED|MATH|MCMM|MILS|MKTG|MLHC|MNGT|MUSC|NURS|PBHL|PEDW|PHIL|PHSC|PHYS|POLS|PSCI|PSYC|RCCM|READ|SCIE|SOSC|SOWK|SPAN|SSCI|STAT|VETY|ZOOL|SOCI|ISCI|ARTS|ENVS|THEA|FTA|GFA |ORGL|HADM|OATC|SJUS)\n/';
+$CD_fields = array('Subject' => '',
+						 'Number' => '',
+						 'Title' => '',
+						 'Grade' => '',
+						 'Credits' => '',
+						 'Notes' => '');
+						 
+// takes data between subject titles and assigns to $CD_felds as string with entries delimited by ;
+$count = 0;
+foreach ($text as $info) {
+	// after placing first 5 values into $CD_fields, restart count if preg_grep($subjects, $info)
+	if ($count = 6 || $count = 5 && !empty(preg_grep($subjects, $info))) $count = 0;
+	// FIXME: add each entry to $CD_fields as indexed array so that elements correspond by index
+}
+
 echo "<pre>";
 print_r($text);
+print_r($UD_fields);
 echo "</pre>";
 ?>
