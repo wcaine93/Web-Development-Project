@@ -1,0 +1,119 @@
+Project {
+  database_type: 'MySQL'
+  Note: 'Database for registration system for Web Development (Spring 2024)'
+}
+
+
+Table users {
+  user_id smallint [pk, increment]
+  md5_PIN varchar(32)
+  school_email varchar(64)
+  account_type tinytext [note: 'based on domain of email address (student email -> student, admin email -> admin']
+}
+
+Table student_info as stud {
+  user_id smallint [ref: - users.user_id]
+  student_id varchar(9)
+  name text
+  classification classification
+  advisor text
+  GPA varchar(5) [note: 'no need to use approximate numeric type as numeric operations are not implemented']
+  level degree_level
+  degree text
+  major text
+  concentration text
+  minor text
+}
+
+enum classification {
+  Freshman
+  Sophomore
+  Junior
+  Senior
+}
+
+enum degree_level {
+  undergraduate
+  graduate
+}
+
+Table class_info as class {
+  user_id smallint [ref: > users.user_id]
+  class_id smallint [ref: - prev_classes.class_id, ref: - curr_classes.class_id]
+  state class_state
+}
+
+enum class_state {
+  current
+  previous
+}
+
+Table prev_classes {
+  class_id smallint [pk, increment]
+  subject varchar(4)
+  number varchar(4)
+  modifier varchar(1) [note: 'letter following course title: L for lab, H for honors, K or nothing']
+  title varchar(64)
+  credits varchar(1)
+  grade grade
+  notes text
+}
+
+enum grade {
+  A
+  B
+  C
+  D
+  F
+  WF
+  I
+  IP
+  CP
+  W
+  WM
+  S
+  K
+  U
+  V
+}
+
+Table curr_classes {
+  class_id smallint [pk, increment]
+  semester PofT [note: 'not sure what "PofT" means, but this field denotes when class takes place']
+  subject varchar(4)
+  number varchar(4)
+  modifier varchar(1) [note: 'letter following course title: L for lab, H for honors, K or nothing']
+  section varchar(3)
+  CRN varchar(5)
+  title varchar(64)
+  notes text
+  credits varchar(1)
+  enrolled smallint
+  total_seats smallint
+  start_time time
+  end_time time
+  days varchar(5)
+  location text
+  instructor text
+  campus campus
+}
+
+enum PofT {
+  "1" [note: 'full semester']
+  "2" [note: 'beginning-of-semester minimister']
+  "3" [note: 'end-of-semester minimester']
+  ECO [note: 'eCore, full semester']
+  EC2 [note: 'eCore, beginning-of-semester minimister']
+  EC3 [note: 'eCore, end-of-semester minimister']
+  EM [note: 'eMajor, full semester']
+  EM2 [note: 'eMajor, beginning-of-semester minimister']
+  EM3 [note: 'eMajor, end-of-semester minimister']
+}
+
+enum campus {
+  "On-Line"
+  "Main Campus"
+  "FVSU-Warner Robins Campus"
+  "E-Core"
+  "E-Major" 
+}
