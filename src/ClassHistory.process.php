@@ -85,31 +85,71 @@ foreach ($UD_fields as $field => $regex) {
 /**
  * III: Assigns class data (CD) for database allocation
  *
- * To reduce complexity searching over large arrays, parsed data is shifted off array after use
+ * Uses $text internal pointer to assign data to $CD_fields aligned by index across keys
+ * (i.e. $CD_fields['subject'][1] corresponds to $CD_fields['number'][1])
  */
-$semester_year = '/(Spring|Summer|Fall) [0-9]{4}/';
-$subjects = '/^(ACCT|AENT|AGEC|ANSC|ARTH|BHSC|BIOL|BIOT|BLOG|BOTN|BUSA|CHEM|COMM|COUN|CRJU|CSCI|CSIS|DATA|ECON|ECSP|EDMG|EDSC|EDUC|EEGG|ELET|ENGG|ENGL|EPSY|FCSC|FDNU|FREN|FVSU|GEOG|GEOL|GERO|HIST|HLTH|HORT|HPER|ICDV|ITEC|MAED|MATH|MCMM|MILS|MKTG|MLHC|MNGT|MUSC|NURS|PBHL|PEDW|PHIL|PHSC|PHYS|POLS|PSCI|PSYC|RCCM|READ|SCIE|SOSC|SOWK|SPAN|SSCI|STAT|VETY|ZOOL|SOCI|ISCI|ARTS|ENVS|THEA|FTA|GFA |ORGL|HADM|OATC|SJUS)\n/';
-$CD_fields = array('semester' => '',
-						 'year' => '',
-						 'subject' => '',
-						 'number' => '',
-						 'modifier' => '',
-						 'title' => '',
-						 'grade' => '',
-						 'credits' => '',
-						 'notes' => '');
+$sem_year_regex = '/(Spring|Summer|Fall) [0-9]{4}/';
+$subjects = '/^(ACCT|AENT|AGEC|ANSC|ARTH|BHSC|BIOL|BIOT|BLOG|BOTN|BUSA|CHEM|COMM|COUN|CRJU|CSCI|CSIS|DATA|ECON|ECSP|EDMG|EDSC|EDUC|EEGG|ELET|ENGG|ENGL|EPSY|FCSC|FDNU|FREN|FVSU|GEOG|GEOL|GERO|HIST|HLTH|HORT|HPER|ICDV|ITEC|MAED|MATH|MCMM|MILS|MKTG|MLHC|MNGT|MUSC|NURS|PBHL|PEDW|PHIL|PHSC|PHYS|POLS|PSCI|PSYC|RCCM|READ|SCIE|SOSC|SOWK|SPAN|SSCI|STAT|VETY|ZOOL|SOCI|ISCI|ARTS|ENVS|THEA|FTA|GFA |ORGL|HADM|OATC|SJUS)$/';
+$CD_fields = array('semester' => [],
+						 'year' => [],
+						 'subject' => [],
+						 'number' => [],
+						 'modifier' => [], // in $text, appended to course number
+						 'title' => [],
+						 'grade' => [],
+						 'credits' => [],
+						 'notes' => []);
 						 
-// takes data between subject titles and assigns to $CD_felds as string with entries delimited by ";"
+// takes data between subject titles and assigns to $CD_felds as string
+// multiple entries delimited by ";"
 $count = 0;
 foreach ($text as $info) {
-	// after placing first 5 values into $CD_fields, restart count if preg_grep($subjects, $info)
-	if ($count = 6 || $count = 5 && !empty(preg_grep($subjects, $info))) $count = 0;
-	// FIXME: add each entry to $CD_fields as indexed array so that elements correspond by index
-	// use for (0, index) with foreach nested inside
+	// update semester and year each time heading appears in $text
+	if (preg_match($sem_year_regex, $info) != FALSE) {
+		$sem_year = explode(' ', $info);
+		$semester = $sem_year[0];
+		$year = $sem_year[1];
+		
+		// set internal array pointer to subject element
+		reset($CD_fields); // semester
+		next($CD_fields); // year
+		next($CD_fields); // subject
+		continue;
+	}
+	
+	// move to next class information when new subject is reached
+	if (preg_match($subjects, $info) != FALSE) {
+		++$count;
+		$CD_fields['semester'][$count] = $semester;
+		$CD_fields['year'][$count] = $year;
+		$CD_fields['subject'][$count] = $info;
+		
+		// set internal array pointer to next element
+		reset($CD_fields); // semester
+		next($CD_fields); // year
+		next($CD_fields); // subject
+		next($CD_fields); // number
+		continue;
+	}
+
+	// if the current key is 'number', check number for course modifier and separate
+	if(key($CD_fields) == 'number') {
+		preg_match('/([0-9]{4})(.)?/', $info, $number);
+		$CD_fields['number'][$count] = $number[1]; // first capture group contains number
+		$CD_fields['modifier'][$count] = $number[2]; // second capture group contains modifier
+		
+		next($CD_fields); // modifier
+		next($CD_fields); // title
+	}
+	// else assign to corresponding field, skipping blank rows
+	else if (preg_match('/^\s*$/', $info) == FALSE) {
+		$CD_fields[key($CD_fields)][$count] = $CD_fields[key($CD_fields)][$count] . $info;
+		next($CD_fields);
+	}
 }
 
 echo "<pre>";
 print_r($text);
-print_r($UD_fields);
+print_r($CD_fields);
 echo "</pre>";
 ?>

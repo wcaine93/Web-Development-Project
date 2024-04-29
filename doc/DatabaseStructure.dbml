@@ -68,6 +68,7 @@ enum semester {
 }
 
 enum grade {
+  CURR
   A
   B
   C
