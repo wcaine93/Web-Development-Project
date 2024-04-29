@@ -50,6 +50,8 @@ enum class_state {
 
 Table prev_classes {
   class_id smallint [pk, increment]
+  semester semester
+  year year [note: 'year data type only valid up to 2155']
   subject varchar(4)
   number varchar(4)
   modifier varchar(1) [note: 'letter following course title: L for lab, H for honors, K or nothing']
@@ -57,6 +59,12 @@ Table prev_classes {
   credits varchar(1)
   grade grade
   notes text
+}
+
+enum semester {
+  Summer
+  Spring
+  Fall
 }
 
 enum grade {
