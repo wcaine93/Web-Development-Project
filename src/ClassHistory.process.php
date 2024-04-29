@@ -49,32 +49,32 @@ $text = array_slice($text, $start_index);
  * To reduce complexity searching over large arrays, parsed data is shifted off array after use
  */
 // field => regex to be replaced with field => data[] in next step
-$UD_fields = array('student' => '/Student/', 
+$UD_fields = array('name' => '/Student/', 
 						'level' => '/Level/', 
-						'id' => '/ID/', 
+						'student_id' => '/ID/', 
 						'degree' => '/Degree/', 
 						'classification' => '/Classification/', 
 						'major' => '/Major[s]?/', 
 						'advisor' => '/Advisor[s]?/', 
 						'concentration' => '/Concentration[s]?/', 
-						'GPA' => '/Institutional GPA/', // only field whose name differs
+						'GPA' => '/Institutional GPA/',
 						'minor' => '/Minor[s]?/',
-						'classes' => '/(Spring|Summer|Fall) [0-9]{4}/');
+					   'classes' => '/(Spring|Summer|Fall) [0-9]{4}/' /* only for termination */);
 
 // takes all data between field names and inserts into $UD_fields as array
 $arr = preg_grep('/Student/', $text); // dummy variable
 if($arr === FALSE) missingData("Student");
 $text = array_slice($text, array_key_first($arr)); // locate key (first instance)
-$prev_field = 'Student';
+$prev_field = 'name';
 foreach ($UD_fields as $field => $regex) {
-	if ($field == 'Student') continue;
+	if ($field == 'name') continue;
 	// locates key of (first instance of) $field, notify user as missing if nonexistent
 	$arr = preg_grep($regex, $text); // dummy variable
 	if($arr === FALSE) missingData($field);
 	$next_index = array_key_first($arr);
 	
 	// assigns data[] of $prev_field to $UD_fields, removing empty values
-	$UD_fields[$prev_field] = array_values(preg_grep('/^\S/', array_slice($text, 1, $next_index - 1)));
+	$UD_fields[$prev_field] = array_values(preg_grep('/^\S+/', array_slice($text, 1, $next_index - 1)));
 	
 	// shifts off assigned field information
 	$text = array_slice($text, $next_index);
@@ -87,6 +87,7 @@ foreach ($UD_fields as $field => $regex) {
  *
  * To reduce complexity searching over large arrays, parsed data is shifted off array after use
  */
+$semester_year = '/(Spring|Summer|Fall) [0-9]{4}/';
 $subjects = '/^(ACCT|AENT|AGEC|ANSC|ARTH|BHSC|BIOL|BIOT|BLOG|BOTN|BUSA|CHEM|COMM|COUN|CRJU|CSCI|CSIS|DATA|ECON|ECSP|EDMG|EDSC|EDUC|EEGG|ELET|ENGG|ENGL|EPSY|FCSC|FDNU|FREN|FVSU|GEOG|GEOL|GERO|HIST|HLTH|HORT|HPER|ICDV|ITEC|MAED|MATH|MCMM|MILS|MKTG|MLHC|MNGT|MUSC|NURS|PBHL|PEDW|PHIL|PHSC|PHYS|POLS|PSCI|PSYC|RCCM|READ|SCIE|SOSC|SOWK|SPAN|SSCI|STAT|VETY|ZOOL|SOCI|ISCI|ARTS|ENVS|THEA|FTA|GFA |ORGL|HADM|OATC|SJUS)\n/';
 $CD_fields = array('semester' => '',
 						 'year' => '',
