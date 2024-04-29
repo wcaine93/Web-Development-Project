@@ -88,7 +88,9 @@ foreach ($UD_fields as $field => $regex) {
  * To reduce complexity searching over large arrays, parsed data is shifted off array after use
  */
 $subjects = '/^(ACCT|AENT|AGEC|ANSC|ARTH|BHSC|BIOL|BIOT|BLOG|BOTN|BUSA|CHEM|COMM|COUN|CRJU|CSCI|CSIS|DATA|ECON|ECSP|EDMG|EDSC|EDUC|EEGG|ELET|ENGG|ENGL|EPSY|FCSC|FDNU|FREN|FVSU|GEOG|GEOL|GERO|HIST|HLTH|HORT|HPER|ICDV|ITEC|MAED|MATH|MCMM|MILS|MKTG|MLHC|MNGT|MUSC|NURS|PBHL|PEDW|PHIL|PHSC|PHYS|POLS|PSCI|PSYC|RCCM|READ|SCIE|SOSC|SOWK|SPAN|SSCI|STAT|VETY|ZOOL|SOCI|ISCI|ARTS|ENVS|THEA|FTA|GFA |ORGL|HADM|OATC|SJUS)\n/';
-$CD_fields = array('subject' => '',
+$CD_fields = array('semester' => '',
+						 'year' => '',
+						 'subject' => '',
 						 'number' => '',
 						 'modifier' => '',
 						 'title' => '',
