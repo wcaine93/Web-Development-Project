@@ -144,7 +144,9 @@ foreach ($text as $info) {
 	// else assign to corresponding field, skipping blank rows
 	else if (preg_match('/^\s*$/', $info) == FALSE) {
 		$CD_fields[key($CD_fields)][$count] = $CD_fields[key($CD_fields)][$count] . $info;
-		next($CD_fields);
+		
+		// do not advance if field is 'notes'
+		if(key($CD_fields) != 'notes') next($CD_fields);
 	}
 }
 
