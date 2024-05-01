@@ -7,6 +7,16 @@ input {
   margin-bottom: 1rem;
 }
 
-.center {
+input:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+
+.centertext {
 	text-align: center;
+}
+
+div {
+	font-family: Helvetica, Georgia, sans-serif;
 }
