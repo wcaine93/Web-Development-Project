@@ -1,3 +1,17 @@
+:root {
+	--bkg: #ecf8fa; /* lighter light blue */
+	
+	--center-margin: 200px;
+	
+	--center-border: 28px;
+	
+	/* center padding */
+	--center-pl: 36px;
+	--center-pr: 36px;
+	--center-pb: 72px;
+	--center-pt: 108px;
+}
+
 div {
 	font-family: Helvetica, Georgia, sans-serif;
 }
@@ -8,7 +22,7 @@ label {
 }
 
 input {
-  margin-bottom: 1rem;
+	margin: 1rem;
 }
 
 input:hover {
@@ -17,6 +31,33 @@ input:hover {
 }
 
 
+.notop {
+	margin-top: 0;
+}
+
 .centertext {
 	text-align: center;
+}
+
+.bkg {
+	background: var(--bkg);
+	justify-content: center;
+	padding: 48px;
+}
+
+.center {
+	margin-left: var(--center-margin);
+	margin-right: var(--center-margin);
+	
+	border-radius: var(--center-border);
+	
+	padding-left: var(--center-pl);
+	padding-right: var(--center-pr);
+	padding-bottom: var(--center-pb);
+	padding-top: var(--center-pt);
+	
+	width: auto;
+	min-height: 384px;
+	
+	background: white;
 }
