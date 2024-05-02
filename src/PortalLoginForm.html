@@ -15,18 +15,25 @@
 	<div id="header">
 		<!--FIXME: header-->
 	</div>
-	<div class="center" id="display_panel">
+	<div id="display_panel" class="center" >
 		<div id="page_title">
 			<h1 class="centertext notop" id="log_in_to_registration_portal">Sign In to SeatMe Registration Portal</h1>
 		</div>
 		<div id="login_form">
 			<form action="PortalLoginForm_submit" method="post" accept-charset="utf-8">
-				<label for="class_history">Username </label>
-				<input type="file" name="class_history" accept="application/pdf" id="class_history">
-				<p><input type="submit" name="upload" value="Upload files"></p>
-				 <button class="active:bg-slate-600">ddd</button>
-	
-				<p class="centertext"><input type="submit" name="upload" value="Upload files"></p>
+				<div id="inputs">
+					<div class="row" id="student_id">
+						<label for="username">Student ID</label>
+						<input type="text" name="student_id" autocomplete="username" placeholder="910XXXXXX" minlength="9" maxlength="9" id="username">
+					</div>
+					<div class="row" id="PIN">
+						<label for="password">PIN</label>
+						<input type="text" name="PIN" autocomplete="password" placeholder="Between 8 and 20 characters" minlength="8" maxlength="20" style="width: 17em;" id="password">
+					</div>					
+				</div>
+				<div id="submit" class="centertext" style="margin-top: 80px /* to match page_title margin */">
+					<input type="submit" name="submit" class="button" value="Sign In">
+				</div>
 			</form>
 		</div>
 	</div>
