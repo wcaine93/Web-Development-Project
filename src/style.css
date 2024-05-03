@@ -47,6 +47,10 @@ input:hover {
   cursor: pointer;
 }
 
+input:invalid {
+	background-color: lightpink;
+}
+
 
 .notop {
 	margin-top: 0;
