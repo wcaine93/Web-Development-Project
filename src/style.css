@@ -1,5 +1,6 @@
 :root {
 	--bkg: #ecf8fa; /* lighter light blue */
+	--green: #00AA66; /* neon green */
 	
 	--center-margin: 200px;
 	
@@ -10,15 +11,31 @@
 	--center-pr: 36px;
 	--center-pb: 72px;
 	--center-pt: 108px;
+	
+	/* button */
+	--button-height: 3.5em;
+	--button-width: 7em;
+	--button-radius: calc(var(--button-height)/2);
 }
 
 div {
 	font-family: Helvetica, Georgia, sans-serif;
 }
 
+div.row {
+	display:flex; 
+	flex-direction: row; 
+	justify-content: center; 
+	align-items: center;
+}
+
+h1 {
+	margin-top: 1rem;
+	margin-bottom: 5rem;
+}
+
 label {
 	display: block;
-	margin-top: 1rem;
 }
 
 input {
@@ -60,4 +77,15 @@ input:hover {
 	min-height: 384px;
 	
 	background: white;
+}
+
+.button {
+	border-radius: var(--button-radius);
+	width: var(--button-width);
+	height: var(--button-height);
+	
+	background-color: lightblue;
+	border: none;
+	
+	font-size: .9em;
 }
