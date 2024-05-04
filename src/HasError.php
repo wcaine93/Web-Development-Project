@@ -1,8 +1,8 @@
 <?php
 /**
- * Driver class for ErrorPage.html, collects errors for display on error page to user
+ * Driver class for ErrorPage.html.php, collects errors for display on error page to user
  *
- * @see ErrorPage.html
+ * @see ErrorPage.html.php
  */
 
 $page_name = __FILE__; // default page name to file name
@@ -33,6 +33,6 @@ function page($name) {
  * @return	void
  */
 function display() {
-	readfile('ErrorPage.html');
+	readfile('ErrorPage.html.php');
 }
 ?>
