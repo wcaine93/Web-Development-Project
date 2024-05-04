@@ -1,6 +1,6 @@
 <?php
 /**
- * Driver class for ErrorPage.html.php, collects errors for display on error page to user
+ * Driver class for ErrorPage.html.php, collects errors for display on error page to user. When included, page($name) should be called
  *
  * @see ErrorPage.html.php
  */
@@ -15,9 +15,9 @@ $errors = [];
  * @param	String	$error_text
  * @return	void
  */
-function error($error_text) {
+function error($error_message) {
 	global $errors;
-	$errors[] = $error_text;
+	$errors[] = $error_message;
 }
 
 /**
