@@ -8,7 +8,13 @@ Table users {
   user_id smallint [pk, increment]
   md5_PIN varchar(32)
   school_email varchar(64)
-  account_type tinytext [note: 'based on domain of email address (student email -> student, admin email -> admin']
+  account_type account_type [note: 'based on domain of email address (student email -> student, admin email -> admin)']
+}
+
+enum account_type {
+  student
+  admin
+  sysadmin
 }
 
 Table student_info as stud {
