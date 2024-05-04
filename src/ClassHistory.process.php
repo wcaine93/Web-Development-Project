@@ -1,12 +1,12 @@
 <?php
 /**
- * Contains methods to read ClassHistory pdf file and turn into database entry
+ * Read ClassHistory pdf file and turns into database entry
  */
 
 
 /**
  * Ends execution and notifies user of data missing from class history document, sending back to ClassHistoryForm.html for reexecution
- * @see ClassHistoryForm.hmtl
+ * @see ClassHistoryForm.html
  *
  * @param	String	$missing_data	specifies the field name for missing data
  * @return	void
