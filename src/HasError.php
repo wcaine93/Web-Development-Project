@@ -5,7 +5,8 @@
  * @see ErrorPage.html.php
  */
 
-$page_name = __FILE__; // default page name to file name
+$file_name = basename(__FILE__); // file that calls HasError, for use on display page
+$page_name = $file_name; // default page name to file name
 $errors = [];
 
 /**
@@ -15,6 +16,7 @@ $errors = [];
  * @return	void
  */
 function error($error_text) {
+	global $errors;
 	$errors[] = $error_text;
 }
 
@@ -24,7 +26,8 @@ function error($error_text) {
  * @return	void
  */
 function page($name) {
-	$page_name = 'the' . $name;
+	global $page_name;
+	$page_name = $name;
 }
 
 /**
@@ -33,6 +36,8 @@ function page($name) {
  * @return	void
  */
 function display() {
-	readfile('ErrorPage.html.php');
+	ob_start();
+	include('ErrorPage.html.php');
+	echo ob_get_clean();
 }
 ?>
