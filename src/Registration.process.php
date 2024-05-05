@@ -6,7 +6,7 @@
  */
 
 // Allow for display of errors on error page
-include('HasError.php'); // methods error($error_message), display()
+include('HasError.inc.php'); // methods error($error_message), display()
 page('Registration');
 
 
