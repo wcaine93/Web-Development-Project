@@ -73,5 +73,42 @@ function validEmail($email) {
 	return true;
 }
 
-validEmail($_POST['email']);
+$email = $_POST['email'];
+validEmail($email);
+
+
+/**
+ * II: Validate format of student ID (series of 9 digits starting with 910)
+ */
+$id = $_POST['student_id'];
+if (preg_match('/910[0-9]{6}/', $id) == 0) {
+	error('Invalid student ID. Must be in the form 910XXXXXX');
+}
+
+
+/**
+ * III: Validate PIN (8-20 characters, matching confirm PIN field)
+ */
+$new_password = $_POST['new_PIN'];
+$confirm_password = $_POST['confirm_PIN'];
+
+// new and confirm PINs must match
+if (strcmp($new_password, $confirm_password) != 0) {
+	error('Confirm PIN must be the same as chosen PIN');
+}
+
+// PIN length
+if (strlen($new_password) < 8 || strlen($confirm_password) < 8) {
+	error('The chosen PIN is too short. Must be at least 8 characters');
+}
+if (strlen($new_password) > 20 || strlen($confirm_password) > 20) {
+	error('The chosen PIN is too long. Must be no more than than 20 characters long.');
+}
+
+/**
+ * IV: Display error page or place information into database
+ */
+if (display()) die();
+
+// 
 ?>
