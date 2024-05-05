@@ -31,13 +31,17 @@ function page($name) {
 }
 
 /**
- * Displays error page using $errors array
+ * Displays error page using $errors array.
  *
- * @return	void
+ * @return	bool	true if page displayed, false if no errors
  */
 function display() {
+	global $errors;
+	if (count($errors) == 0) return false;
+	
 	ob_start();
 	include('ErrorPage.html.php');
 	echo ob_get_clean();
+	return true;
 }
 ?>
