@@ -23,23 +23,23 @@
 			<div id="form_information">
 				<p class="centertext" style="font-size:.9em">Note: All fields are required</p>
 			</div>
-			<form action="PortalSignupForm_submit" method="post" accept-charset="utf-8">
+			<form action="Registration.process.php" method="post" accept-charset="utf-8">
 				<div id="inputs">
 					<div class="row" id="student_email">
 						<label for="email">Student Email</label>
-						<input type="text" name="student_id" autocomplete="email" placeholder="      @wildcat.fvsu.edu" minlength="16" style="width: 13em" id="email">
+						<input type="email" name="email" autocomplete="email" pattern="\S+@wildcat\.fvsu\.edu" placeholder="      @wildcat.fvsu.edu" minlength="16" style="width: 13em" id="email">
 					</div>
 					<div class="row" id="student_id">
 						<label for="username">Student ID</label>
 						<input type="text" name="student_id" autocomplete="username" placeholder=" 910XXXXXX" minlength="9" maxlength="9" style="width: 15em" id="username">
 					</div>
 					<div class="row" id="new_PIN">
-						<label for="password">New PIN</label>
-						<input type="text" name="PIN" autocomplete="new-password" placeholder=" Between 8 and 20 characters" minlength="8" maxlength="20" style="width: 16em" id="new_password">
+						<label for="new_password">New PIN</label>
+						<input type="text" name="new_PIN" autocomplete="new-password" placeholder=" Between 8 and 20 characters" minlength="8" maxlength="20" style="width: 16em" id="new_password">
 					</div>
 					<div class="row" id="confirm_PIN">
-						<label for="password">Confirm PIN</label>
-						<input type="text" name="PIN" autocomplete="current-password" placeholder=" Must be the same as above" minlength="8" maxlength="20" style="width: 14em" id="confirm_password">
+						<label for="confirm_password">Confirm PIN</label>
+						<input type="password" name="confirm_PIN" autocomplete="current-password" placeholder=" Must be the same as above" minlength="8" maxlength="20" style="width: 14em" id="confirm_password">
 					</div>
 				</div>
 				<div id="submit" class="centertext" style="margin-top: 60px /* to match page_title margin */">
