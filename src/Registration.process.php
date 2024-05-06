@@ -117,7 +117,7 @@ include('db_connect.inc.php'); // $mysqli object, sql_error()
 
 // check if user already exists and notify user if so
 // check email
-$stmt = 'SELECT count(*) FROM users WHERE email=?';
+$stmt = 'SELECT count(*) FROM users WHERE school_email=?';
 $result = $mysqli->execute_query($stmt, [$email]);
 if ($result !== FALSE) {
 	if ($result->fetch_row()[0] > 0) {
