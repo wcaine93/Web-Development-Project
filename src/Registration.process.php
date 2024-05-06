@@ -1,7 +1,7 @@
 <?php
 /**
  * Processes form output from PortalRegistrationForm.html.php, redisplaying and notifying user
- * on invalid input or uploading information to database and moving to
+ * on invalid input or uploading information to database and moving to 
  * ClassRegistrationForm.html.php on valid input
  */
 
@@ -112,7 +112,7 @@ if (strlen($new_password) > 20 || strlen($confirm_password) > 20) {
 if (display()) die();
 
 // connect to database
-include('db_connect.inc.php'); // $mysqli object
+include('db_connect.inc.php'); // $mysqli object, sql_error()
 
 // check if user already exists and notify user if so
 // check email
@@ -144,16 +144,10 @@ else $account_type = 'admin';
 
 $stmt = 'INSERT INTO users (md5_PIN, school_email, account_type) VALUES (?, ?, ?)';
 $result = $mysqli->execute_query($stmt, [md5($new_password), $email, $account_type]);
-if ($result === FALSE) {
-	readfile('500Error.html.php');
-	die();
-}
+if ($result === FALSE) sql_error();
 $user_id = $mysqli->insert_id;
 
 $stmt = 'INSERT INTO student_info (user_id, student_id) VALUES (?, ?)';
 $result = $mysqli->execute_query($stmt, [$user_id, $id]);
-if ($result === FALSE) {
-	readfile('500Error.html.php');
-	die();
-}
+if ($result === FALSE) sql_error();
 ?>
