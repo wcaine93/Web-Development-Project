@@ -151,4 +151,11 @@ $user_id = $mysqli->insert_id;
 $stmt = 'INSERT INTO student_info (user_id, student_id) VALUES (?, ?)';
 $result = $mysqli->execute_query($stmt, [$user_id, $id]);
 if ($result === FALSE) sql_error();
+
+
+/**
+ * V: Redirect user to next page in user flow
+ */
+include ('session.inc.php');
+send('ClassHistoryForm.html.php');
 ?>
