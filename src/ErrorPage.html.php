@@ -19,7 +19,7 @@
 		<div id="page_title">
 			<h2 class="centertext notop" id="error_header">An error has been detected on the <?php global $page_name; echo $page_name ?> page.<br>Please go back to fix them!</h2>
 		</div>
-		<div id="errors" style="margin-top: 80px; margin-left: 100px">
+		<div id="errors" style="margin-top: 80px; margin-left: 100px; margin-right: 100px">
 			<ol style="font-size: 1.5em">
 				<?php
 				global $errors;
