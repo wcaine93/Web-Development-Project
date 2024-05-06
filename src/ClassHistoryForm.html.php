@@ -12,23 +12,27 @@
   	<title>Upload Class History to SeatMe</title>
 
 	<!-- FIXME: Include upload for both class history and dynamic schedule at same time -->
-  
 </head>
-<body>
+<body class="bkg">
 	<div id="header">
 		<!--FIXME: header-->
 	</div>
-	<div id="title">
-		<h1 id="upload_my_class_history">Upload My Class History to SeatMe</h1> <!--FIXME: center header?-->
-	</div>
-	<div id="class_history_form">
-		<form action="ClassHistoryForm_submit" method="post" enctype="multipart/form-data" accept-charset="utf-8">
-			<!--No max file size-->
-			<label for="class_history">Class history: </label>
-			<input type="file" name="class_history" accept="application/pdf" id="class_history">
-	
-			<p class="centertext"><input type="submit" name="upload" value="Upload files"></p>
-		</form>
+	<div id="display_panel" class="center" >
+		<div id="page_title">
+			<h1 class="centertext notop" id="log_in_to_registration_portal">Upload Class History to SeatMe <a href="LandingPage.html.php"><img alt="SeatMe logo" width="20" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Windsor_Chair.svg/716px-Windsor_Chair.svg.png?20200505051955"></a>&nbsp;</h1>
+		</div>
+		<div id="login_form">
+			<form action="ClassHistory.process.php" method="post" accept-charset="utf-8">
+				<div class="row" id="student_id">
+					<!--No max file size-->
+					<label for="class_history">Class history: </label>
+					<input type="file" name="class_history" accept="application/pdf" id="class_history">
+				</div>
+				<div id="submit" class="centertext" style="margin-top: 80px /* to match page_title margin */">
+					<input type="submit" name="upload" class="button" value="Upload">
+				</div>
+			</form>
+		</div>
 	</div>
 	<div id="footer">
 		<!--FIXME: footer-->
