@@ -5,7 +5,7 @@
  * @see ErrorPage.html.php
  */
 
-$file_name = basename(__FILE__); // file that calls HasError, for use on display page
+$file_name = basename(__FILE__); // file that calls HasError
 $page_name = $file_name; // default page name to file name
 $errors = [];
 
@@ -18,6 +18,16 @@ $errors = [];
 function error($error_message) {
 	global $errors;
 	$errors[] = $error_message;
+}
+
+/**
+ * Set file name for redirection from error page
+ *
+ * @return	void
+ */
+function redirect($name) {
+	global $file_name;
+	$file_name = $name;
 }
 
 /**

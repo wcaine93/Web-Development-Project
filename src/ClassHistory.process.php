@@ -4,17 +4,21 @@
  */
 
 
+// Allow for display of errors on error page
+include('HasError.inc.php'); // methods error($error_message), display()
+page('Class History Upload');
+redirect('ClassHistoryForm.html.php');
+
 /**
- * Ends execution and notifies user of data missing from class history document, sending back to ClassHistoryForm.html for reexecution
+ * Ends execution and notifies user of data missing from class history document via {@link HasError.inc.php}
  * @see ClassHistoryForm.html.php
  *
  * @param	String	$missing_data	specifies the field name for missing data
  * @return	void
  */
 function missingData(string $missing_data, string $error_text = '%s information cannot be found within the class history document.') {
-	echo '<p>'; // FIXME: style tags to center text block in middle of screen
-	echo sprintf($error_text, $missing_data) . ' Please re-upload valid class history document.';
-	echo '</p>'; // FIXME: button leading to ClassHistoryForm.html.php
+	$error_message = sprintf($error_text, $missing_data) . ' Please re-upload valid class history document.';
+	error($error_message);
 	die();
 }
 

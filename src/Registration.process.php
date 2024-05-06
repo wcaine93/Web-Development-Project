@@ -1,13 +1,14 @@
 <?php
 /**
  * Processes form output from PortalRegistrationForm.html.php, redisplaying and notifying user
- * on invalid input or uploading information to database and moving to 
- * ClassRegistrationForm.html.php on valid input
+ * on invalid input or uploading information to database and moving to ClassHistoryForm.html.php
+ * on valid input
  */
 
 // Allow for display of errors on error page
 include('HasError.inc.php'); // methods error($error_message), display()
 page('Registration');
+redirect('PortalRegistrationForm.html.php');
 
 
 /**
