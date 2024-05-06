@@ -17,7 +17,7 @@
 	</div>
 	<div id="display_panel" class="center" >
 		<div id="page_title">
-			<h1 class="centertext notop" id="sign_up_for_registration_portal">Sign up for SeatMe <a href="LandingPage.html"><img alt="SeatMe logo" width="20" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Windsor_Chair.svg/716px-Windsor_Chair.svg.png?20200505051955"></a>&nbsp; Registration Portal</h1>
+			<h1 class="centertext notop" id="sign_up_for_registration_portal">Sign up for SeatMe <a href="LandingPage.html.php"><img alt="SeatMe logo" width="20" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Windsor_Chair.svg/716px-Windsor_Chair.svg.png?20200505051955"></a>&nbsp; Registration Portal</h1>
 		</div>
 		<div id="signup_form">
 			<div id="form_information">

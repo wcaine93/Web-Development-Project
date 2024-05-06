@@ -1,8 +1,8 @@
 <?php
 /**
- * Processes form output from PortalRegistrationForm.html, redisplaying and notifying user on 
- * invalid input or uploading information to database and moving to ClassRegistrationForm.html
- * on valid input
+ * Processes form output from PortalRegistrationForm.html.php, redisplaying and notifying user
+ * on invalid input or uploading information to database and moving to
+ * ClassRegistrationForm.html.php on valid input
  */
 
 // Allow for display of errors on error page
@@ -145,7 +145,7 @@ else $account_type = 'admin';
 $stmt = 'INSERT INTO users (md5_PIN, school_email, account_type) VALUES (?, ?, ?)';
 $result = $mysqli->execute_query($stmt, [md5($new_password), $email, $account_type]);
 if ($result === FALSE) {
-	readfile('500Error.html');
+	readfile('500Error.html.php');
 	die();
 }
 $user_id = $mysqli->insert_id;
@@ -153,7 +153,7 @@ $user_id = $mysqli->insert_id;
 $stmt = 'INSERT INTO student_info (user_id, student_id) VALUES (?, ?)';
 $result = $mysqli->execute_query($stmt, [$user_id, $id]);
 if ($result === FALSE) {
-	readfile('500Error.html');
+	readfile('500Error.html.php');
 	die();
 }
 ?>

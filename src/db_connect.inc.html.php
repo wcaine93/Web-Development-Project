@@ -21,7 +21,7 @@ if ($mysqli->select_db($db_name) === FALSE) $err = true;
 
 // terminate and display error screen if unable to select database
 if ($err) {
-	readfile('500Error.html');
+	readfile('500Error.html.php');
 	$mysqli->close();
 	die();
 }
