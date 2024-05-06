@@ -20,7 +20,7 @@
 			<h1 class="centertext notop" id="log_in_to_registration_portal">Sign in to SeatMe <a href="LandingPage.html.php"><img alt="SeatMe logo" width="20" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Windsor_Chair.svg/716px-Windsor_Chair.svg.png?20200505051955"></a>&nbsp; Registration Portal</h1>
 		</div>
 		<div id="login_form">
-			<form action="PortalLoginForm_submit" method="post" accept-charset="utf-8">
+			<form action="Login.process.php" method="post" accept-charset="utf-8">
 				<div id="inputs">
 					<div class="row" id="student_id">
 						<label for="username">Student ID</label>
