@@ -73,14 +73,14 @@ function validEmail($email) {
 	return true;
 }
 
-$email = $_POST['email'];
+$email = stripslashes($_POST['email']);
 validEmail($email);
 
 
 /**
  * II: Validate format of student ID (series of 9 digits starting with 910)
  */
-$id = $_POST['student_id'];
+$id = stripslashes($_POST['student_id']);
 if (preg_match('/910[0-9]{6}/', $id) == 0) {
 	error('Invalid student ID. Must be in the form 910XXXXXX');
 }
@@ -89,8 +89,8 @@ if (preg_match('/910[0-9]{6}/', $id) == 0) {
 /**
  * III: Validate PIN (8-20 characters, matching confirm PIN field)
  */
-$new_password = $_POST['new_PIN'];
-$confirm_password = $_POST['confirm_PIN'];
+$new_password = stripslashes($_POST['new_PIN']);
+$confirm_password = stripslashes($_POST['confirm_PIN']);
 
 // new and confirm PINs must match
 if (strcmp($new_password, $confirm_password) != 0) {
@@ -105,10 +105,55 @@ if (strlen($new_password) > 20 || strlen($confirm_password) > 20) {
 	error('The chosen PIN is too long. Must be no more than than 20 characters long.');
 }
 
+
 /**
  * IV: Display error page or place information into database
  */
 if (display()) die();
 
-// 
+// connect to database
+include('db_connect.inc.php'); // $mysqli object
+
+// check if user already exists and notify user if so
+// check email
+$stmt = 'SELECT count(*) FROM users WHERE email=?';
+$result = $mysqli->execute_query($stmt, [$email]);
+if ($result !== FALSE) {
+	if ($result->fetch_row()[0] > 0) {
+		$email_html = htmlentities($email);
+		error("The email you entered is already registered to use SeatMe. If you entered the correct email, please use the login page at the top right to access your account with Student ID and PIN. If you did not create an account, please contact your system administrator for assistance. If you entered your email incorrectly, please use the back button below to re-enter it correctly. <br> The email you entered: $email_html");
+		display();
+		die();
+	}
+}
+// check student ID
+$stmt = 'SELECT count(*) FROM student_info WHERE student_id=?';
+$result = $mysqli->execute_query($stmt, [$id]);
+if ($result !== FALSE) {
+	if ($result->fetch_row()[0] > 0) {
+		error("The student ID you entered is already registered to use SeatMe. If you entered the correct student ID, please use the login page at the top right to access your account with your PIN. If you did not create an account, please contact your system administrator for assistance. If you entered your student ID incorrectly, please use the back button below to re-enter it correctly. <br> The student ID you entered: $id");
+		display();
+		die();
+	}
+}
+
+// place information into database
+$domain = substr($email, strrpos($email, '@') + 1);
+if (strcmp($domain, 'wildcat.fvsu.edu') === 0) $account_type = 'student';
+else $account_type = 'admin';
+
+$stmt = 'INSERT INTO users (md5_PIN, school_email, account_type) VALUES (?, ?, ?)';
+$result = $mysqli->execute_query($stmt, [md5($new_password), $email, $account_type]);
+if ($result === FALSE) {
+	readfile('500Error.html');
+	die();
+}
+$user_id = $mysqli->insert_id;
+
+$stmt = 'INSERT INTO student_info (user_id, student_id) VALUES (?, ?)';
+$result = $mysqli->execute_query($stmt, [$user_id, $id]);
+if ($result === FALSE) {
+	readfile('500Error.html');
+	die();
+}
 ?>
